@@ -1,0 +1,3 @@
+threshold,faithfulness,answer_relevancy,context_precision,context_recall,answer_correctness
+0.4,,,,,
+0.6,,,0.0,,

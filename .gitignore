@@ -1,0 +1,10 @@
+venv/
+ragas_env/
+ragas_clean/
+
+__pycache__/
+*.pyc
+
+.env
+
+results/plots/
