@@ -1,8 +1,8 @@
 from langchain_groq import ChatGroq
 
 ##from langchain_google_genai import (
- ##   ChatGoogleGenerativeAI,
-   ## GoogleGenerativeAIEmbeddings
+##   ChatGoogleGenerativeAI,
+##   GoogleGenerativeAIEmbeddings
 ##}
 
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -33,11 +33,11 @@ from datasets import Dataset
 from ragas import evaluate
 
 from ragas.metrics import (
-    # faithfulness,
-    # answer_relevancy,
+    faithfulness,
+    answer_relevancy,
     context_precision,
     context_recall,
-    # answer_correctness
+    answer_correctness
 )
 
 from src.retriever import MultiHopRetriever
@@ -187,8 +187,11 @@ def compute_ragas(df):
     result = evaluate(
         ragas_dataset,
         metrics=[
+            faithfulness,
+            answer_relevancy,
             context_precision,
-            context_recall
+            context_recall,
+            answer_correctness
         ],
         llm=local_llm,
         embeddings=local_embeddings
@@ -210,7 +213,7 @@ if __name__ == "__main__":
 
     df04 = run_experiment(
         threshold=0.4,
-        num_questions=3
+        num_questions=500
     )
 
     df04.to_csv(
@@ -228,7 +231,7 @@ if __name__ == "__main__":
 
     df06 = run_experiment(
         threshold=0.6,
-        num_questions=3
+        num_questions=500
     )
 
     df06.to_csv(
